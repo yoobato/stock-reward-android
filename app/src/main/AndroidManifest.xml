@@ -13,7 +13,7 @@
         android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.ChartActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="sensorPortrait">
