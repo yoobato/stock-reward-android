@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("/")
-    fun getBoardTalks(): Call<TestObject>
+    @GET("/api/fstock/order")
+    fun getForeignStockOrder(): Call<TestObject>
 }
