@@ -77,17 +77,19 @@ class MainActivity : Activity() {
 
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(object: ItemClickSupport.OnItemClickListener{
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                val percent = ((data[position].currentUnitPrice - data[position].baseUnitPrice).toFloat() /
+                        data[position].baseUnitPrice.toFloat() * 100f)
                 val intent = Intent(this@MainActivity, StockHistoryActivity::class.java)
+
                 intent.putExtra(Constants.KEY_STOCK_ID, data[position].stockId)
                 intent.putExtra(Constants.KEY_CURRENT_UNIT, data[position].currentUnitPrice)
+                intent.putExtra(Constants.KEY_EARN_PERCENT, percent)
                 startActivity(intent)
             }
         })
 
-
         getSummary(1)
     }
-
 
     private fun setData(data: List<Summary>) {
         var summaryBlance = 0

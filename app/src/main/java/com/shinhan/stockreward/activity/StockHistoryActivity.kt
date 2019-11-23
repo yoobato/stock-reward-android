@@ -3,7 +3,6 @@ package com.shinhan.stockreward.activity
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +36,7 @@ class StockHistoryActivity : Activity() {
     private var originValue = 0
     private var currentValue = 0
     private var currentUnit = 0
+    private var earnPercent = 0f
     private val labels = arrayListOf("", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +45,16 @@ class StockHistoryActivity : Activity() {
 
         stockId = intent.getIntExtra(Constants.KEY_STOCK_ID, 0)
         currentUnit = intent.getIntExtra(Constants.KEY_CURRENT_UNIT, 0)
+        earnPercent = intent.getFloatExtra(Constants.KEY_EARN_PERCENT, 0f)
 
         findViewById<TextView>(R.id.text_current_price).text = "현재가 : ${DecimalFormat("#,###").format(currentUnit)}원"
+        findViewById<TextView>(R.id.text_current_percent).apply {
+            text = "${if (earnPercent > 0) "+" else ""}${"%.2f".format(earnPercent).toDouble()} %"
+            setTextColor(
+                if (earnPercent >= 0) Color.parseColor("#E03131")
+                else Color.parseColor("#6DD400")
+            )
+        }
 
         initRecyclerView()
         initChart()

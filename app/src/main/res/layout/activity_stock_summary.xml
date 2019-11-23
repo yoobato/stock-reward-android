@@ -33,6 +33,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/text_current_percent"
+        android:textColor="#fff"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/action_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bar_chart"
         android:layout_below="@id/text_current_price"
