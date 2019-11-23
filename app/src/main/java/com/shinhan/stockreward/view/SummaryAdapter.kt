@@ -19,7 +19,8 @@ class SummaryAdapter constructor(private val list: List<Summary>) : RecyclerView
         R.drawable.ic_lf,
         R.drawable.ic_hanssem,
         R.drawable.ic_apple,
-        R.drawable.ic_hilton
+        R.drawable.ic_hilton,
+        R.drawable.ic_shinhan
     )
     inner class ViewHolder internal constructor(
         itemView: View

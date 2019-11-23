@@ -14,13 +14,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="40sp"
+            android:textSize="25sp"
             android:gravity="center"
-            android:layout_marginRight="4dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#E03131"
             android:text="+"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -28,7 +29,8 @@
                 android:id="@+id/text_stock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35sp"
+                android:textColor="#ffffff"
+                android:textSize="34sp"
                 android:text="0.95"/>
 
             <TextView
@@ -37,8 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="32,420원"/>
+                android:textSize="14sp"
+                android:textColor="#eeeeee"
+                android:text="323,420원"/>
 
 
         </LinearLayout>
@@ -51,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -59,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="#eeeeee"
             android:text="삼성 플라자 (홍익대)"/>
 
         <TextView
@@ -66,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:textColor="#ededed"
             android:text="2019.11.10"/>
 
     </LinearLayout>

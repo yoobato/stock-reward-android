@@ -1,8 +1,10 @@
 package com.shinhan.stockreward.activity
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,11 +22,11 @@ import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
-import com.github.mikephil.charting.model.GradientColor
-import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import kotlin.math.roundToInt
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import java.text.DecimalFormat
 
 
 class StockHistoryActivity : Activity() {
@@ -35,6 +37,7 @@ class StockHistoryActivity : Activity() {
     private var originValue = 0
     private var currentValue = 0
     private var currentUnit = 0
+    private val labels = arrayListOf("Point", "Stock", "no")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,8 @@ class StockHistoryActivity : Activity() {
 
         stockId = intent.getIntExtra(Constants.KEY_STOCK_ID, 0)
         currentUnit = intent.getIntExtra(Constants.KEY_CURRENT_UNIT, 0)
+
+        findViewById<TextView>(R.id.text_current_price).text = "현재가 : ${DecimalFormat("#,###").format(currentUnit)}원"
 
         initRecyclerView()
         initChart()
@@ -64,66 +69,54 @@ class StockHistoryActivity : Activity() {
         chart.setDrawGridBackground(false)
         // chart.setDrawYLabels(false);
 
-        val xAxis = chart.getXAxis()
-        xAxis.setPosition(XAxisPosition.BOTTOM)
+        val xAxis = chart.xAxis
+        xAxis.position = XAxisPosition.BOTTOM
+        xAxis.textColor = Color.WHITE
         xAxis.setDrawGridLines(false)
-        xAxis.setGranularity(1f) // only intervals of 1 day
-        xAxis.setLabelCount(7)
+        xAxis.setGranularity(1f)
+        xAxis.setCenterAxisLabels(true)
+        xAxis.setValueFormatter(IndexAxisValueFormatter(labels))
 
 
         val leftAxis = chart.getAxisLeft()
         leftAxis.setLabelCount(8, false)
         leftAxis.setPosition(YAxisLabelPosition.OUTSIDE_CHART)
         leftAxis.setSpaceTop(15f)
+        leftAxis.textColor = Color.WHITE
         leftAxis.setAxisMinimum(0f) // this replaces setStartAtZero(true)
-
-        val rightAxis = chart.getAxisRight()
-        rightAxis.setDrawGridLines(false)
-        rightAxis.setLabelCount(8, false)
-        rightAxis.setSpaceTop(15f)
-        rightAxis.setAxisMinimum(0f) // this replaces setStartAtZero(true)
+        chart.setNoDataText("데이터를 불러오는 중입니다..")
+        chart.axisRight.isEnabled = false
     }
 
     private fun setData() {
         val values = arrayListOf<BarEntry>()
-        values.add(BarEntry(1f, originValue.toFloat()))
-        values.add(BarEntry(2f, currentValue.toFloat()))
+        val values2 = arrayListOf<BarEntry>()
+        values.add(BarEntry(1f, originValue.toFloat(), "Point"))
+        values2.add(BarEntry(2f, currentValue.toFloat(), "Stock"))
         val set1: BarDataSet
+        val set2: BarDataSet
 
         if (chart.data != null && chart.data.dataSetCount > 0) {
             set1 = chart.data.getDataSetByIndex(0) as BarDataSet
             set1.values = values
 
         } else {
-            set1 = BarDataSet(values, "")
+            set1 = BarDataSet(values, "first")
+            set2 = BarDataSet(values2, "second")
 
             set1.setDrawIcons(false)
+            set2.setDrawIcons(false)
 
-            val startColor1 = ContextCompat.getColor(this, android.R.color.holo_orange_light)
-            val startColor2 = ContextCompat.getColor(this, android.R.color.holo_blue_light)
-            val startColor3 = ContextCompat.getColor(this, android.R.color.holo_orange_light)
-            val startColor4 = ContextCompat.getColor(this, android.R.color.holo_green_light)
-            val startColor5 = ContextCompat.getColor(this, android.R.color.holo_red_light)
-            val endColor1 = ContextCompat.getColor(this, android.R.color.holo_blue_dark)
-            val endColor2 = ContextCompat.getColor(this, android.R.color.holo_purple)
-            val endColor3 = ContextCompat.getColor(this, android.R.color.holo_green_dark)
-            val endColor4 = ContextCompat.getColor(this, android.R.color.holo_red_dark)
-            val endColor5 = ContextCompat.getColor(this, android.R.color.holo_orange_dark)
-
-            val gradientColors = arrayListOf<GradientColor>()
-            gradientColors.add(GradientColor(startColor1, endColor1))
-            gradientColors.add(GradientColor(startColor2, endColor2))
-            gradientColors.add(GradientColor(startColor3, endColor3))
-            gradientColors.add(GradientColor(startColor4, endColor4))
-            gradientColors.add(GradientColor(startColor5, endColor5))
-
-            set1.gradientColors = gradientColors
+            set1.color = Color.parseColor("#0B77E3")
+            set2.color = Color.parseColor("#6D7278")
 
             val dataSets = arrayListOf<IBarDataSet>()
             dataSets.add(set1)
+            dataSets.add(set2)
 
             val data = BarData(dataSets)
             data.setValueTextSize(10f)
+            data.setValueTextColor(Color.WHITE)
             data.setBarWidth(0.6f)
 
             chart.data = data
@@ -155,8 +148,7 @@ class StockHistoryActivity : Activity() {
                     originValue += (stock.baseUnitPrice * stock.amount).roundToInt()
                     currentValue += (currentUnit * stock.amount).roundToInt()
                 }
-                Log.d("origin", originValue.toString())
-                Log.d("current", currentValue.toString())
+                findViewById<TextView>(R.id.text_title).text = stockList[0].stockName
                 setData()
             }
 
