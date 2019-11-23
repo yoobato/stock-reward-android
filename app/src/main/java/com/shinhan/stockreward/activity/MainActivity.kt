@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +63,7 @@ class MainActivity : Activity() {
             isRotationEnabled = true
             isHighlightPerTapEnabled = true
             legend.isEnabled = false
+            setNoDataText("데이터를 불러오는 중입니다..")
         }
         //chart.setOnChartValueSelectedListener(this)
 
@@ -137,6 +139,7 @@ class MainActivity : Activity() {
     private fun getSummary(userId: Int) {
         ApiManager.apiService.getSummary(userId).enqueue(object: Callback<List<Summary>>{
             override fun onResponse(call: Call<List<Summary>>, response: Response<List<Summary>>) {
+                findViewById<LinearLayout>(R.id.balance_wrapper).visibility = View.VISIBLE
                 setData(response.body()!!)
                 data = response.body()!!
                 recyclerView.adapter = SummaryAdapter(response.body()!!)
