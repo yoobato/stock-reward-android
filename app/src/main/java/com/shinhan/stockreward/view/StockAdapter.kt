@@ -7,11 +7,17 @@ import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.shinhan.stockreward.R
+import com.shinhan.stockreward.api.model.Stock
+import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
-class StockAdapter constructor(val list: ArrayList<String>) : RecyclerView.Adapter<StockAdapter.ViewHolder>() {
+class StockAdapter constructor(private val list: List<Stock>) : RecyclerView.Adapter<StockAdapter.ViewHolder>() {
     inner class ViewHolder internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        internal var textView1: TextView = itemView.findViewById(R.id.text_stock)
+        internal var stock = itemView.findViewById<TextView>(R.id.text_stock)
+        internal var money = itemView.findViewById<TextView>(R.id.text_money)
+        internal var store = itemView.findViewById<TextView>(R.id.text_store)
+        internal var date = itemView.findViewById<TextView>(R.id.date_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,8 +29,12 @@ class StockAdapter constructor(val list: ArrayList<String>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val text = list.get(position)
-        holder.textView1.text = text
+        val stock = list[position]
+        holder.stock.text = stock.amount.toString()
+        holder.money.text = "${DecimalFormat("#,###").format((stock.amount * stock.baseUnitPrice).roundToInt())} 원"
+        holder.store.text = stock.storeName
+        holder.date.text = stock.createdAt.split("T")[0]
+
     }
 
     override fun getItemCount() = list.count()

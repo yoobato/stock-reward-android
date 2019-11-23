@@ -1,9 +1,11 @@
 package com.shinhan.stockreward.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,9 +20,9 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
 import com.shinhan.stockreward.R
 import com.shinhan.stockreward.api.ApiManager
-import com.shinhan.stockreward.api.ApiService
 import com.shinhan.stockreward.api.model.Summary
-import com.shinhan.stockreward.api.model.TestObject
+import com.shinhan.stockreward.util.Constants
+import com.shinhan.stockreward.util.ItemClickSupport
 import com.shinhan.stockreward.view.SummaryAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,6 +34,7 @@ class MainActivity : Activity() {
     private lateinit var chart: PieChart
     private lateinit var recyclerView: RecyclerView
     private lateinit var balance: TextView
+    private lateinit var data: List<Summary>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,7 @@ class MainActivity : Activity() {
             setEntryLabelTextSize(12f)
             animateY(1400, Easing.EaseInOutQuad)
 
-            description.isEnabled = true
+            description.isEnabled = false
             dragDecelerationFrictionCoef = 0.95f
             isDrawHoleEnabled = true
             holeRadius = 48f
@@ -69,6 +72,14 @@ class MainActivity : Activity() {
             setDrawable(resources.getDrawable(R.drawable.divider_cccccc))
         }
         recyclerView.addItemDecoration(dividerItemDecoration)
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(object: ItemClickSupport.OnItemClickListener{
+            override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                val intent = Intent(this@MainActivity, StockHistoryActivity::class.java)
+                intent.putExtra(Constants.KEY_STOCK_ID, data[position].stockId)
+                startActivity(intent)
+            }
+        })
 
 
         getSummary(1)
@@ -127,6 +138,7 @@ class MainActivity : Activity() {
         ApiManager.apiService.getSummary(userId).enqueue(object: Callback<List<Summary>>{
             override fun onResponse(call: Call<List<Summary>>, response: Response<List<Summary>>) {
                 setData(response.body()!!)
+                data = response.body()!!
                 recyclerView.adapter = SummaryAdapter(response.body()!!)
             }
 

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.DetailActivity"
+        <activity android:name=".activity.StockHistoryActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="sensorPortrait"
