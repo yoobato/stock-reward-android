@@ -11,7 +11,7 @@ import com.shinhan.stockreward.R
 class StockAdapter constructor(val list: ArrayList<String>) : RecyclerView.Adapter<StockAdapter.ViewHolder>() {
     inner class ViewHolder internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        internal var textView1: TextView = itemView.findViewById(R.id.text1)
+        internal var textView1: TextView = itemView.findViewById(R.id.text_stock)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
