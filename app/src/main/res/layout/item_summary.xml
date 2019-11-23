@@ -37,15 +37,31 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_percent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
-        android:textSize="16sp"
-        android:text="- 1.5%"
-        android:textColor="#eeeeee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginRight="8dp">
+
+        <TextView
+            android:id="@+id/text_amount"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#eeeeee"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_percent"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:text="- 1.5%"
+            android:textColor="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

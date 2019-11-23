@@ -28,6 +28,7 @@ class SummaryAdapter constructor(private val list: List<Summary>) : RecyclerView
         internal var stockName = itemView.findViewById<TextView>(R.id.text_stock_name)
         internal var currentPrice = itemView.findViewById<TextView>(R.id.text_current_price)
         internal var percent = itemView.findViewById<TextView>(R.id.text_percent)
+        internal var amount = itemView.findViewById<TextView>(R.id.text_amount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,10 +45,13 @@ class SummaryAdapter constructor(private val list: List<Summary>) : RecyclerView
                 summary.baseUnitPrice.toFloat() * 100f)
         holder.icon.setImageResource(images[summary.stockId - 1])
         holder.stockName.text = summary.stockName
-        holder.currentPrice.text = "현재가 ${DecimalFormat("#,###").format(summary.currentUnitPrice)}"
+        holder.currentPrice.text = "현재가 ₩${DecimalFormat("#,###").format(summary.currentUnitPrice)}"
         holder.percent.text = "${if (percent > 0 ) "+" else ""}${"%.2f".format(percent).toDouble()} %"
-        holder.percent.setTextColor(if (percent >= 0) Color.RED else Color.GREEN)
-
+        holder.percent.setTextColor(
+            if (percent >= 0) Color.parseColor("#E03131")
+            else Color.parseColor("#6DD400")
+        )
+        holder.amount.text = summary.balance.toString() + " 주"
     }
 
     override fun getItemCount() = list.count()

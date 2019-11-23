@@ -45,10 +45,10 @@ class MainActivity : Activity() {
         chart = findViewById(R.id.chart1)
         chart.apply{
             setUsePercentValues(true)
-            setHoleColor(Color.parseColor("#333333"))
-            setTransparentCircleColor(Color.parseColor("#333333"))
-            setTransparentCircleAlpha(110)
-            setExtraOffsets(5f, 10f, 5f, 5f)
+            setHoleColor(Color.parseColor("#343A40"))
+            setTransparentCircleColor(Color.parseColor("#343A40"))
+            setTransparentCircleAlpha (110)
+            setExtraOffsets(5f, 24f, 5f, 0f)
             setDrawCenterText(true)
             setEntryLabelColor(Color.parseColor("#eeeeee"))
             setEntryLabelTextSize(12f)
@@ -107,7 +107,7 @@ class MainActivity : Activity() {
         val dataSet = PieDataSet(entries, "Election Results").apply {
             setDrawIcons(false)
 
-            sliceSpace = 3f
+            sliceSpace = 0f
             iconsOffset = MPPointF(0f, 40f)
             selectionShift = 5f
         }
@@ -116,11 +116,12 @@ class MainActivity : Activity() {
         // add a lot of colors
 
         val colors = ArrayList<Int>()
-        colors.add(Color.parseColor("#00074a"))
-        colors.add(Color.parseColor("#000f99"))
-        colors.add(Color.parseColor("#0011b6"))
-        colors.add(Color.parseColor("#0018fb"))
-        colors.add(Color.parseColor("#344555"))
+        colors.add(Color.parseColor("#13283E"))
+        colors.add(Color.parseColor("#004BA7"))
+        colors.add(Color.parseColor("#0B77E3"))
+        colors.add(Color.parseColor("#009EE8"))
+        colors.add(Color.parseColor("#C9CED9"))
+        colors.add(Color.parseColor("#EEEEEE"))
 
         colors.add(ColorTemplate.getHoloBlue())
 
