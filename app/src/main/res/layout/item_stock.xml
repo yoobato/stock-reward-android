@@ -27,11 +27,12 @@
 
             <TextView
                 android:id="@+id/text_stock"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
-                android:textSize="34sp"
-                android:text="0.95"/>
+                android:textSize="28sp"
+                android:gravity="center"
+                android:text="0.95주"/>
 
             <TextView
                 android:id="@+id/text_money"

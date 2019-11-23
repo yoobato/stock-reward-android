@@ -6,14 +6,14 @@
     <application
         android:name=".StockRewardApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_shinhan"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.SplashActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="sensorPortrait">
@@ -24,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.MainActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            />
 
         <activity android:name=".activity.StockHistoryActivity"
             android:alwaysRetainTaskState="true"

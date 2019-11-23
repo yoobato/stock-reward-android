@@ -37,7 +37,7 @@ class StockHistoryActivity : Activity() {
     private var originValue = 0
     private var currentValue = 0
     private var currentUnit = 0
-    private val labels = arrayListOf("Point", "Stock", "no")
+    private val labels = arrayListOf("", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +55,7 @@ class StockHistoryActivity : Activity() {
     private fun initChart() {
         chart = findViewById(R.id.bar_chart)
 
+
         chart.setDrawBarShadow(false)
         chart.setDrawValueAboveBar(false)
         chart.legend.isEnabled  = false
@@ -66,6 +67,11 @@ class StockHistoryActivity : Activity() {
         // scaling can now only be done on x- and y-axis separately
         chart.setPinchZoom(false)
 
+        chart.setTouchEnabled(false)
+        chart.setDragEnabled(false)
+        chart.setScaleEnabled(false)
+        chart.setScaleXEnabled(false)
+        chart.setScaleYEnabled(false)
         chart.setDrawGridBackground(false)
         // chart.setDrawYLabels(false);
 
@@ -123,6 +129,7 @@ class StockHistoryActivity : Activity() {
         }
         chart.data.notifyDataChanged()
         chart.notifyDataSetChanged()
+        chart.invalidate()
     }
 
 

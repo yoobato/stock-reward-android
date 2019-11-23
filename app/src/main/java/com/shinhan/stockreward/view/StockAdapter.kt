@@ -30,7 +30,7 @@ class StockAdapter constructor(private val list: List<Stock>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val stock = list[position]
-        holder.stock.text = stock.amount.toString()
+        holder.stock.text = stock.amount.toString() + "주"
         holder.money.text = "${DecimalFormat("#,###").format((stock.amount * stock.baseUnitPrice).roundToInt())} 원"
         holder.store.text = stock.storeName
         holder.date.text = stock.createdAt.split("T")[0]
