@@ -79,6 +79,7 @@ class MainActivity : Activity() {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                 val intent = Intent(this@MainActivity, StockHistoryActivity::class.java)
                 intent.putExtra(Constants.KEY_STOCK_ID, data[position].stockId)
+                intent.putExtra(Constants.KEY_CURRENT_UNIT, data[position].currentUnitPrice)
                 startActivity(intent)
             }
         })
