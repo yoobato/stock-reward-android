@@ -1,6 +1,5 @@
 package com.shinhan.stockreward.api
 
-import android.text.TextUtils
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -14,7 +13,9 @@ class ApiManager {
     companion object {
         private val BASE_URL = "http://10.3.17.150:3000"
         private val GSON_BUILDER = GsonBuilder()
-        private val GSON = GSON_BUILDER.create()
+        private val GSON = GSON_BUILDER
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
         private val GSON_CONVERTER_FACTORY = GsonConverterFactory.create(GSON)
 
 

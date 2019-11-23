@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shinhan.stockreward.R
 import com.shinhan.stockreward.view.StockAdapter
 
-class RecyclerViewActivity : Activity() {
+class DetailActivity : Activity() {
 
     private lateinit var recyclerView: RecyclerView
     private val stockList = arrayListOf<String>()

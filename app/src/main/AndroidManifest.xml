@@ -13,7 +13,7 @@
         android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".activity.RecyclerViewActivity"
+        <activity android:name=".activity.MainActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="sensorPortrait">
@@ -24,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.DetailActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="sensorPortrait"
+            />
 
     </application>
 </manifest>
